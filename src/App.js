@@ -19,6 +19,7 @@ export default function App() {
   return (
     <div>
       <Accordion data={faqs} />
+      <TipCalculator />
     </div>
   );
 }
@@ -57,5 +58,35 @@ function AccordionItem({ num, title, curOpen, onOpen, children }) {
       <p className="icon">{isOpen ? "-" : "+"}</p>
       {isOpen && <div className="content-box">{children}</div>}
     </div>
+  );
+}
+
+function TipCalculator() {
+  return (
+    <div>
+      <p>How much was the bill?</p>
+      <input type="text" />
+
+      <p>How did you like the serivce?</p>
+      <Tip />
+
+      <p>How did your friends like the serivce?</p>
+      <Tip />
+
+      <h2>You pay 0 ($0 + $0 Tip)</h2>
+
+      <button>Reset</button>
+    </div>
+  );
+}
+
+function Tip() {
+  return (
+    <select>
+      <option>Dissatisfield (0%)</option>
+      <option>It was ok (5%)</option>
+      <option>It was good (10%)</option>
+      <option>Amazing (20%)</option>
+    </select>
   );
 }
