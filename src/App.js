@@ -62,10 +62,16 @@ function AccordionItem({ num, title, curOpen, onOpen, children }) {
 }
 
 function TipCalculator() {
+  const [value, setValue] = useState(0);
+
+  const handelChange = (e) => {
+    setValue(e.target.value);
+  };
+
   return (
     <div>
       <p>How much was the bill?</p>
-      <input type="text" />
+      <input type="text" value={value} onChange={handelChange} />
 
       <p>How did you like the serivce?</p>
       <Tip />
@@ -73,7 +79,9 @@ function TipCalculator() {
       <p>How did your friends like the serivce?</p>
       <Tip />
 
-      <h2>You pay 0 ($0 + $0 Tip)</h2>
+      <h2>
+        You pay {value} (${value} + $0 Tip)
+      </h2>
 
       <button>Reset</button>
     </div>
