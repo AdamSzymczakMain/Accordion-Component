@@ -63,9 +63,13 @@ function AccordionItem({ num, title, curOpen, onOpen, children }) {
 
 function TipCalculator() {
   const [value, setValue] = useState(0);
+  const [percentage1, setpercentage1] = useState(0);
+  const [percentage2, setpercentage2] = useState(0);
+
+  const tip = (value * (percentage1 + percentage2)) / 2 / 100;
 
   const handelChange = (e) => {
-    setValue(e.target.value);
+    setValue(Number(e.target.value));
   };
 
   return (
@@ -74,13 +78,13 @@ function TipCalculator() {
       <input type="text" value={value} onChange={handelChange} />
 
       <p>How did you like the serivce?</p>
-      <Tip />
+      <Tip percentage={percentage1} onSelcet={setpercentage1} />
 
       <p>How did your friends like the serivce?</p>
-      <Tip />
+      <Tip percentage={percentage2} onSelcet={setpercentage2} />
 
       <h2>
-        You pay {value} (${value} + $0 Tip)
+        You pay {value + tip} (${value} + ${tip} Tip)
       </h2>
 
       <button>Reset</button>
@@ -88,13 +92,16 @@ function TipCalculator() {
   );
 }
 
-function Tip() {
+function Tip({ percentage, onSelcet }) {
   return (
-    <select>
-      <option>Dissatisfield (0%)</option>
-      <option>It was ok (5%)</option>
-      <option>It was good (10%)</option>
-      <option>Amazing (20%)</option>
+    <select
+      value={percentage}
+      onChange={(e) => onSelcet(Number(e.target.value))}
+    >
+      <option value={0}>Dissatisfield (0%)</option>
+      <option value={5}>It was ok (5%)</option>
+      <option value={10}>It was good (10%)</option>
+      <option value={20}>Amazing (20%)</option>
     </select>
   );
 }
