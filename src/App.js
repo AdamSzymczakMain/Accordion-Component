@@ -62,11 +62,17 @@ function AccordionItem({ num, title, curOpen, onOpen, children }) {
 }
 
 function TipCalculator() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("");
   const [percentage1, setpercentage1] = useState(0);
   const [percentage2, setpercentage2] = useState(0);
 
   const tip = (value * (percentage1 + percentage2)) / 2 / 100;
+
+  function onReset() {
+    setValue("");
+    setpercentage1(0);
+    setpercentage2(0);
+  }
 
   const handelChange = (e) => {
     setValue(Number(e.target.value));
@@ -87,7 +93,7 @@ function TipCalculator() {
         You pay {value + tip} (${value} + ${tip} Tip)
       </h2>
 
-      <button>Reset</button>
+      <button onClick={onReset}>Reset</button>
     </div>
   );
 }
